@@ -1,4 +1,4 @@
-# LAASP
+# LAASP -- documentation-in-progress -- 
 
 Implementation of LAASP with PyTorch. Pruning the selected set of filters & restructuring the network is based on [VainF/Torch-Pruning](https://github.com/VainF/Torch-Pruning).
 
