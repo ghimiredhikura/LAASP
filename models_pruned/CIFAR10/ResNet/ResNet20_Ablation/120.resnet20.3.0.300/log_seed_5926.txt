@@ -1,0 +1,523 @@
+save path : C:/Deepak/CIFAR10_PRUNE_OneShot_Abla_Prune_Epoch/120.resnet20.3.0.300
+{'data_path': './data/cifar.python', 'pretrain_path': './', 'pruned_path': './', 'dataset': 'cifar10', 'arch': 'resnet20', 'save_path': 'C:/Deepak/CIFAR10_PRUNE_OneShot_Abla_Prune_Epoch/120.resnet20.3.0.300', 'mode': 'prune', 'batch_size': 256, 'verbose': False, 'total_epoches': 160, 'prune_epoch': 120, 'recover_epoch': 1, 'lr': 0.1, 'momentum': 0.9, 'decay': 0.0005, 'schedule': [40, 80, 120], 'gammas': [0.2, 0.2, 0.2], 'seed': 1, 'no_cuda': False, 'ngpu': 1, 'workers': 8, 'rate_flop': 0.3, 'manualSeed': 5926, 'cuda': True, 'use_cuda': True}
+Random Seed: 5926
+python version : 3.9.7 (default, Sep 16 2021, 16:59:28) [MSC v.1916 64 bit (AMD64)]
+torch  version : 1.10.2
+cudnn  version : 8200
+Pretrain path: ./
+Pruned path: ./
+=> creating model 'resnet20'
+=> Model : CifarResNet(
+  (conv_1_3x3): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_2): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_3): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AvgPool2d(kernel_size=8, stride=8, padding=0)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+=> parameter : Namespace(data_path='./data/cifar.python', pretrain_path='./', pruned_path='./', dataset='cifar10', arch='resnet20', save_path='C:/Deepak/CIFAR10_PRUNE_OneShot_Abla_Prune_Epoch/120.resnet20.3.0.300', mode='prune', batch_size=256, verbose=False, total_epoches=160, prune_epoch=120, recover_epoch=1, lr=0.1, momentum=0.9, decay=0.0005, schedule=[40, 80, 120], gammas=[0.2, 0.2, 0.2], seed=1, no_cuda=False, ngpu=1, workers=8, rate_flop=0.3, manualSeed=5926, cuda=True, use_cuda=True)
+Epoch 0/160 [learning_rate=0.100000] Val [Acc@1=53.790, Acc@5=94.620 | Loss= 1.27688
+
+==>>[2022-08-16 18:05:38] [Epoch=000/160] [Need: 00:00:00] [learning_rate=0.1000] [Best : Acc@1=53.79, Error=46.21]
+Epoch 1/160 [learning_rate=0.100000] Val [Acc@1=60.390, Acc@5=96.600 | Loss= 1.15183
+
+==>>[2022-08-16 18:06:21] [Epoch=001/160] [Need: 02:03:49] [learning_rate=0.1000] [Best : Acc@1=60.39, Error=39.61]
+Epoch 2/160 [learning_rate=0.100000] Val [Acc@1=64.420, Acc@5=97.820 | Loss= 1.03103
+
+==>>[2022-08-16 18:07:05] [Epoch=002/160] [Need: 01:58:52] [learning_rate=0.1000] [Best : Acc@1=64.42, Error=35.58]
+Epoch 3/160 [learning_rate=0.100000] Val [Acc@1=70.740, Acc@5=98.210 | Loss= 0.85048
+
+==>>[2022-08-16 18:07:49] [Epoch=003/160] [Need: 01:56:56] [learning_rate=0.1000] [Best : Acc@1=70.74, Error=29.26]
+Epoch 4/160 [learning_rate=0.100000] Val [Acc@1=63.780, Acc@5=94.310 | Loss= 1.26857
+Epoch 5/160 [learning_rate=0.100000] Val [Acc@1=73.690, Acc@5=98.450 | Loss= 0.76856
+
+==>>[2022-08-16 18:09:16] [Epoch=005/160] [Need: 01:54:12] [learning_rate=0.1000] [Best : Acc@1=73.69, Error=26.31]
+Epoch 6/160 [learning_rate=0.100000] Val [Acc@1=69.480, Acc@5=97.220 | Loss= 1.07675
+Epoch 7/160 [learning_rate=0.100000] Val [Acc@1=71.890, Acc@5=98.510 | Loss= 0.84032
+Epoch 8/160 [learning_rate=0.100000] Val [Acc@1=74.070, Acc@5=98.160 | Loss= 0.77375
+
+==>>[2022-08-16 18:11:27] [Epoch=008/160] [Need: 01:51:35] [learning_rate=0.1000] [Best : Acc@1=74.07, Error=25.93]
+Epoch 9/160 [learning_rate=0.100000] Val [Acc@1=69.640, Acc@5=97.770 | Loss= 0.98672
+Epoch 10/160 [learning_rate=0.100000] Val [Acc@1=71.190, Acc@5=97.090 | Loss= 0.97002
+Epoch 11/160 [learning_rate=0.100000] Val [Acc@1=74.820, Acc@5=97.780 | Loss= 0.77947
+
+==>>[2022-08-16 18:13:39] [Epoch=011/160] [Need: 01:49:15] [learning_rate=0.1000] [Best : Acc@1=74.82, Error=25.18]
+Epoch 12/160 [learning_rate=0.100000] Val [Acc@1=73.110, Acc@5=97.490 | Loss= 0.86858
+Epoch 13/160 [learning_rate=0.100000] Val [Acc@1=75.880, Acc@5=98.670 | Loss= 0.72268
+
+==>>[2022-08-16 18:15:07] [Epoch=013/160] [Need: 01:47:49] [learning_rate=0.1000] [Best : Acc@1=75.88, Error=24.12]
+Epoch 14/160 [learning_rate=0.100000] Val [Acc@1=79.630, Acc@5=98.930 | Loss= 0.61196
+
+==>>[2022-08-16 18:15:51] [Epoch=014/160] [Need: 01:47:01] [learning_rate=0.1000] [Best : Acc@1=79.63, Error=20.37]
+Epoch 15/160 [learning_rate=0.100000] Val [Acc@1=78.430, Acc@5=99.070 | Loss= 0.64734
+Epoch 16/160 [learning_rate=0.100000] Val [Acc@1=74.400, Acc@5=98.540 | Loss= 0.84286
+Epoch 17/160 [learning_rate=0.100000] Val [Acc@1=80.330, Acc@5=99.000 | Loss= 0.59844
+
+==>>[2022-08-16 18:18:02] [Epoch=017/160] [Need: 01:44:39] [learning_rate=0.1000] [Best : Acc@1=80.33, Error=19.67]
+Epoch 18/160 [learning_rate=0.100000] Val [Acc@1=79.260, Acc@5=99.120 | Loss= 0.61265
+Epoch 19/160 [learning_rate=0.100000] Val [Acc@1=79.160, Acc@5=98.160 | Loss= 0.64476
+Epoch 20/160 [learning_rate=0.100000] Val [Acc@1=73.950, Acc@5=98.170 | Loss= 0.83963
+Epoch 21/160 [learning_rate=0.100000] Val [Acc@1=77.170, Acc@5=98.760 | Loss= 0.77903
+Epoch 22/160 [learning_rate=0.100000] Val [Acc@1=79.400, Acc@5=98.560 | Loss= 0.65426
+Epoch 23/160 [learning_rate=0.100000] Val [Acc@1=79.490, Acc@5=98.800 | Loss= 0.64485
+Epoch 24/160 [learning_rate=0.100000] Val [Acc@1=75.120, Acc@5=97.520 | Loss= 0.82332
+Epoch 25/160 [learning_rate=0.100000] Val [Acc@1=77.880, Acc@5=98.260 | Loss= 0.75764
+Epoch 26/160 [learning_rate=0.100000] Val [Acc@1=75.880, Acc@5=98.250 | Loss= 0.78349
+Epoch 27/160 [learning_rate=0.100000] Val [Acc@1=82.830, Acc@5=99.340 | Loss= 0.50157
+
+==>>[2022-08-16 18:25:20] [Epoch=027/160] [Need: 01:37:17] [learning_rate=0.1000] [Best : Acc@1=82.83, Error=17.17]
+Epoch 28/160 [learning_rate=0.100000] Val [Acc@1=80.930, Acc@5=98.720 | Loss= 0.56491
+Epoch 29/160 [learning_rate=0.100000] Val [Acc@1=80.890, Acc@5=99.140 | Loss= 0.56684
+Epoch 30/160 [learning_rate=0.100000] Val [Acc@1=77.240, Acc@5=98.930 | Loss= 0.68953
+Epoch 31/160 [learning_rate=0.100000] Val [Acc@1=77.340, Acc@5=98.770 | Loss= 0.74277
+Epoch 32/160 [learning_rate=0.100000] Val [Acc@1=80.340, Acc@5=98.830 | Loss= 0.62685
+Epoch 33/160 [learning_rate=0.100000] Val [Acc@1=81.000, Acc@5=98.510 | Loss= 0.61651
+Epoch 34/160 [learning_rate=0.100000] Val [Acc@1=76.640, Acc@5=98.980 | Loss= 0.78213
+Epoch 35/160 [learning_rate=0.100000] Val [Acc@1=79.370, Acc@5=99.000 | Loss= 0.67029
+Epoch 36/160 [learning_rate=0.100000] Val [Acc@1=79.050, Acc@5=98.550 | Loss= 0.64811
+Epoch 37/160 [learning_rate=0.100000] Val [Acc@1=82.240, Acc@5=98.980 | Loss= 0.55500
+Epoch 38/160 [learning_rate=0.100000] Val [Acc@1=78.680, Acc@5=99.090 | Loss= 0.64962
+Epoch 39/160 [learning_rate=0.100000] Val [Acc@1=82.700, Acc@5=99.220 | Loss= 0.53139
+Epoch 40/160 [learning_rate=0.020000] Val [Acc@1=89.880, Acc@5=99.710 | Loss= 0.30868
+
+==>>[2022-08-16 18:34:49] [Epoch=040/160] [Need: 01:27:41] [learning_rate=0.0200] [Best : Acc@1=89.88, Error=10.12]
+Epoch 41/160 [learning_rate=0.020000] Val [Acc@1=90.020, Acc@5=99.750 | Loss= 0.30018
+
+==>>[2022-08-16 18:35:33] [Epoch=041/160] [Need: 01:26:57] [learning_rate=0.0200] [Best : Acc@1=90.02, Error=9.98]
+Epoch 42/160 [learning_rate=0.020000] Val [Acc@1=90.360, Acc@5=99.770 | Loss= 0.29979
+
+==>>[2022-08-16 18:36:16] [Epoch=042/160] [Need: 01:26:13] [learning_rate=0.0200] [Best : Acc@1=90.36, Error=9.64]
+Epoch 43/160 [learning_rate=0.020000] Val [Acc@1=89.630, Acc@5=99.670 | Loss= 0.32036
+Epoch 44/160 [learning_rate=0.020000] Val [Acc@1=89.960, Acc@5=99.730 | Loss= 0.30869
+Epoch 45/160 [learning_rate=0.020000] Val [Acc@1=90.260, Acc@5=99.730 | Loss= 0.30386
+Epoch 46/160 [learning_rate=0.020000] Val [Acc@1=89.880, Acc@5=99.700 | Loss= 0.32213
+Epoch 47/160 [learning_rate=0.020000] Val [Acc@1=89.340, Acc@5=99.770 | Loss= 0.32674
+Epoch 48/160 [learning_rate=0.020000] Val [Acc@1=89.350, Acc@5=99.770 | Loss= 0.33857
+Epoch 49/160 [learning_rate=0.020000] Val [Acc@1=88.850, Acc@5=99.730 | Loss= 0.36437
+Epoch 50/160 [learning_rate=0.020000] Val [Acc@1=89.680, Acc@5=99.710 | Loss= 0.32473
+Epoch 51/160 [learning_rate=0.020000] Val [Acc@1=89.090, Acc@5=99.560 | Loss= 0.35800
+Epoch 52/160 [learning_rate=0.020000] Val [Acc@1=90.070, Acc@5=99.740 | Loss= 0.31550
+Epoch 53/160 [learning_rate=0.020000] Val [Acc@1=89.290, Acc@5=99.700 | Loss= 0.35485
+Epoch 54/160 [learning_rate=0.020000] Val [Acc@1=89.000, Acc@5=99.650 | Loss= 0.35571
+Epoch 55/160 [learning_rate=0.020000] Val [Acc@1=88.760, Acc@5=99.650 | Loss= 0.37223
+Epoch 56/160 [learning_rate=0.020000] Val [Acc@1=89.340, Acc@5=99.670 | Loss= 0.33372
+Epoch 57/160 [learning_rate=0.020000] Val [Acc@1=89.140, Acc@5=99.700 | Loss= 0.35073
+Epoch 58/160 [learning_rate=0.020000] Val [Acc@1=89.620, Acc@5=99.660 | Loss= 0.33946
+Epoch 59/160 [learning_rate=0.020000] Val [Acc@1=87.470, Acc@5=99.570 | Loss= 0.43120
+Epoch 60/160 [learning_rate=0.020000] Val [Acc@1=88.340, Acc@5=99.640 | Loss= 0.39302
+Epoch 61/160 [learning_rate=0.020000] Val [Acc@1=88.870, Acc@5=99.630 | Loss= 0.36255
+Epoch 62/160 [learning_rate=0.020000] Val [Acc@1=88.960, Acc@5=99.700 | Loss= 0.36418
+Epoch 63/160 [learning_rate=0.020000] Val [Acc@1=88.710, Acc@5=99.650 | Loss= 0.37233
+Epoch 64/160 [learning_rate=0.020000] Val [Acc@1=86.490, Acc@5=99.740 | Loss= 0.48281
+Epoch 65/160 [learning_rate=0.020000] Val [Acc@1=88.610, Acc@5=99.700 | Loss= 0.35911
+Epoch 66/160 [learning_rate=0.020000] Val [Acc@1=88.160, Acc@5=99.600 | Loss= 0.40206
+Epoch 67/160 [learning_rate=0.020000] Val [Acc@1=88.760, Acc@5=99.550 | Loss= 0.36400
+Epoch 68/160 [learning_rate=0.020000] Val [Acc@1=87.930, Acc@5=99.640 | Loss= 0.39705
+Epoch 69/160 [learning_rate=0.020000] Val [Acc@1=87.910, Acc@5=99.600 | Loss= 0.41064
+Epoch 70/160 [learning_rate=0.020000] Val [Acc@1=87.950, Acc@5=99.590 | Loss= 0.40539
+Epoch 71/160 [learning_rate=0.020000] Val [Acc@1=87.450, Acc@5=99.620 | Loss= 0.40474
+Epoch 72/160 [learning_rate=0.020000] Val [Acc@1=88.060, Acc@5=99.600 | Loss= 0.39478
+Epoch 73/160 [learning_rate=0.020000] Val [Acc@1=87.590, Acc@5=99.570 | Loss= 0.41478
+Epoch 74/160 [learning_rate=0.020000] Val [Acc@1=87.590, Acc@5=99.580 | Loss= 0.41769
+Epoch 75/160 [learning_rate=0.020000] Val [Acc@1=88.400, Acc@5=99.620 | Loss= 0.37028
+Epoch 76/160 [learning_rate=0.020000] Val [Acc@1=88.270, Acc@5=99.520 | Loss= 0.40315
+Epoch 77/160 [learning_rate=0.020000] Val [Acc@1=88.850, Acc@5=99.540 | Loss= 0.36673
+Epoch 78/160 [learning_rate=0.020000] Val [Acc@1=88.350, Acc@5=99.460 | Loss= 0.38688
+Epoch 79/160 [learning_rate=0.020000] Val [Acc@1=84.480, Acc@5=99.480 | Loss= 0.54150
+Epoch 80/160 [learning_rate=0.004000] Val [Acc@1=91.400, Acc@5=99.760 | Loss= 0.28974
+
+==>>[2022-08-16 19:04:00] [Epoch=080/160] [Need: 00:58:25] [learning_rate=0.0040] [Best : Acc@1=91.40, Error=8.60]
+Epoch 81/160 [learning_rate=0.004000] Val [Acc@1=91.680, Acc@5=99.760 | Loss= 0.28531
+
+==>>[2022-08-16 19:04:43] [Epoch=081/160] [Need: 00:57:40] [learning_rate=0.0040] [Best : Acc@1=91.68, Error=8.32]
+Epoch 82/160 [learning_rate=0.004000] Val [Acc@1=91.520, Acc@5=99.770 | Loss= 0.28790
+Epoch 83/160 [learning_rate=0.004000] Val [Acc@1=91.550, Acc@5=99.710 | Loss= 0.29479
+Epoch 84/160 [learning_rate=0.004000] Val [Acc@1=91.640, Acc@5=99.770 | Loss= 0.28938
+Epoch 85/160 [learning_rate=0.004000] Val [Acc@1=91.540, Acc@5=99.660 | Loss= 0.29503
+Epoch 86/160 [learning_rate=0.004000] Val [Acc@1=91.560, Acc@5=99.720 | Loss= 0.29265
+Epoch 87/160 [learning_rate=0.004000] Val [Acc@1=91.640, Acc@5=99.720 | Loss= 0.29111
+Epoch 88/160 [learning_rate=0.004000] Val [Acc@1=91.500, Acc@5=99.740 | Loss= 0.29751
+Epoch 89/160 [learning_rate=0.004000] Val [Acc@1=91.750, Acc@5=99.710 | Loss= 0.30074
+
+==>>[2022-08-16 19:10:32] [Epoch=089/160] [Need: 00:51:48] [learning_rate=0.0040] [Best : Acc@1=91.75, Error=8.25]
+Epoch 90/160 [learning_rate=0.004000] Val [Acc@1=91.800, Acc@5=99.750 | Loss= 0.29458
+
+==>>[2022-08-16 19:11:16] [Epoch=090/160] [Need: 00:51:05] [learning_rate=0.0040] [Best : Acc@1=91.80, Error=8.20]
+Epoch 91/160 [learning_rate=0.004000] Val [Acc@1=91.400, Acc@5=99.700 | Loss= 0.30544
+Epoch 92/160 [learning_rate=0.004000] Val [Acc@1=91.500, Acc@5=99.750 | Loss= 0.30302
+Epoch 93/160 [learning_rate=0.004000] Val [Acc@1=91.560, Acc@5=99.730 | Loss= 0.30394
+Epoch 94/160 [learning_rate=0.004000] Val [Acc@1=91.570, Acc@5=99.760 | Loss= 0.30957
+Epoch 95/160 [learning_rate=0.004000] Val [Acc@1=91.480, Acc@5=99.710 | Loss= 0.31257
+Epoch 96/160 [learning_rate=0.004000] Val [Acc@1=91.610, Acc@5=99.780 | Loss= 0.31304
+Epoch 97/160 [learning_rate=0.004000] Val [Acc@1=91.410, Acc@5=99.790 | Loss= 0.32042
+Epoch 98/160 [learning_rate=0.004000] Val [Acc@1=91.500, Acc@5=99.710 | Loss= 0.31619
+Epoch 99/160 [learning_rate=0.004000] Val [Acc@1=91.310, Acc@5=99.750 | Loss= 0.32388
+Epoch 100/160 [learning_rate=0.004000] Val [Acc@1=91.320, Acc@5=99.710 | Loss= 0.32578
+Epoch 101/160 [learning_rate=0.004000] Val [Acc@1=91.300, Acc@5=99.690 | Loss= 0.31869
+Epoch 102/160 [learning_rate=0.004000] Val [Acc@1=91.600, Acc@5=99.710 | Loss= 0.31019
+Epoch 103/160 [learning_rate=0.004000] Val [Acc@1=91.650, Acc@5=99.730 | Loss= 0.31916
+Epoch 104/160 [learning_rate=0.004000] Val [Acc@1=91.480, Acc@5=99.740 | Loss= 0.33129
+Epoch 105/160 [learning_rate=0.004000] Val [Acc@1=91.470, Acc@5=99.660 | Loss= 0.32910
+Epoch 106/160 [learning_rate=0.004000] Val [Acc@1=91.470, Acc@5=99.740 | Loss= 0.32337
+Epoch 107/160 [learning_rate=0.004000] Val [Acc@1=91.620, Acc@5=99.710 | Loss= 0.32527
+Epoch 108/160 [learning_rate=0.004000] Val [Acc@1=91.640, Acc@5=99.750 | Loss= 0.32050
+Epoch 109/160 [learning_rate=0.004000] Val [Acc@1=91.480, Acc@5=99.740 | Loss= 0.33188
+Epoch 110/160 [learning_rate=0.004000] Val [Acc@1=91.510, Acc@5=99.720 | Loss= 0.32368
+Epoch 111/160 [learning_rate=0.004000] Val [Acc@1=91.430, Acc@5=99.760 | Loss= 0.32920
+Epoch 112/160 [learning_rate=0.004000] Val [Acc@1=91.240, Acc@5=99.700 | Loss= 0.32873
+Epoch 113/160 [learning_rate=0.004000] Val [Acc@1=91.390, Acc@5=99.650 | Loss= 0.33732
+Epoch 114/160 [learning_rate=0.004000] Val [Acc@1=91.870, Acc@5=99.750 | Loss= 0.32678
+
+==>>[2022-08-16 19:28:52] [Epoch=114/160] [Need: 00:33:36] [learning_rate=0.0040] [Best : Acc@1=91.87, Error=8.13]
+Epoch 115/160 [learning_rate=0.004000] Val [Acc@1=91.350, Acc@5=99.720 | Loss= 0.33555
+Epoch 116/160 [learning_rate=0.004000] Val [Acc@1=91.480, Acc@5=99.800 | Loss= 0.32763
+Epoch 117/160 [learning_rate=0.004000] Val [Acc@1=91.490, Acc@5=99.690 | Loss= 0.33331
+Epoch 118/160 [learning_rate=0.004000] Val [Acc@1=91.490, Acc@5=99.750 | Loss= 0.32635
+Epoch 119/160 [learning_rate=0.004000] Val [Acc@1=91.320, Acc@5=99.690 | Loss= 0.33248
+Val Acc@1: 91.320, Acc@5: 99.690,  Loss: 0.33248
+[Pruning Method: l1norm] Flop Reduction Rate: 0.007226/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.010, Acc@5=99.730 | Loss= 0.31734
+
+==>>[2022-08-16 19:34:08] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.01, Error=7.99]
+[Pruning Method: cos] Flop Reduction Rate: 0.014452/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.110, Acc@5=99.720 | Loss= 0.32066
+
+==>>[2022-08-16 19:35:05] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.11, Error=7.89]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.021678/0.300000 [Pruned 1 filters from 15]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.900, Acc@5=99.690 | Loss= 0.32068
+
+==>>[2022-08-16 19:36:02] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.90, Error=8.10]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.028904/0.300000 [Pruned 1 filters from 15]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.030, Acc@5=99.710 | Loss= 0.31923
+
+==>>[2022-08-16 19:36:59] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.03, Error=7.97]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.036130/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.020, Acc@5=99.720 | Loss= 0.32299
+
+==>>[2022-08-16 19:37:56] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.02, Error=7.98]
+[Pruning Method: eucl] Flop Reduction Rate: 0.043355/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.050, Acc@5=99.710 | Loss= 0.32383
+
+==>>[2022-08-16 19:38:53] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.05, Error=7.95]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.050581/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.040, Acc@5=99.710 | Loss= 0.32116
+
+==>>[2022-08-16 19:39:50] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.04, Error=7.96]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.057807/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=92.040, Acc@5=99.670 | Loss= 0.32337
+
+==>>[2022-08-16 19:40:47] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=92.04, Error=7.96]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.065033/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.780, Acc@5=99.670 | Loss= 0.32584
+
+==>>[2022-08-16 19:41:44] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.78, Error=8.22]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.072259/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.800, Acc@5=99.640 | Loss= 0.32595
+
+==>>[2022-08-16 19:42:41] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.80, Error=8.20]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.079485/0.300000 [Pruned 1 filters from 15]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.780, Acc@5=99.720 | Loss= 0.33040
+
+==>>[2022-08-16 19:43:37] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.78, Error=8.22]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.086711/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.770, Acc@5=99.680 | Loss= 0.33121
+
+==>>[2022-08-16 19:44:34] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.77, Error=8.23]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.093937/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.780, Acc@5=99.720 | Loss= 0.33174
+
+==>>[2022-08-16 19:45:30] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.78, Error=8.22]
+[Pruning Method: eucl] Flop Reduction Rate: 0.101163/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.790, Acc@5=99.640 | Loss= 0.33342
+
+==>>[2022-08-16 19:46:27] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.79, Error=8.21]
+[Pruning Method: eucl] Flop Reduction Rate: 0.112001/0.300000 [Pruned 3 filters from 29]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.600, Acc@5=99.660 | Loss= 0.33151
+
+==>>[2022-08-16 19:47:23] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.60, Error=8.40]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.119227/0.300000 [Pruned 1 filters from 15]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.680, Acc@5=99.650 | Loss= 0.33149
+
+==>>[2022-08-16 19:48:19] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.68, Error=8.32]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.126453/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.590, Acc@5=99.710 | Loss= 0.33511
+
+==>>[2022-08-16 19:49:14] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.59, Error=8.41]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.133679/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.560, Acc@5=99.660 | Loss= 0.33247
+
+==>>[2022-08-16 19:50:10] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.56, Error=8.44]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.140905/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.690, Acc@5=99.720 | Loss= 0.33267
+
+==>>[2022-08-16 19:51:06] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.69, Error=8.31]
+[Pruning Method: cos] Flop Reduction Rate: 0.151744/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.470, Acc@5=99.670 | Loss= 0.33923
+
+==>>[2022-08-16 19:52:02] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.47, Error=8.53]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.158970/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.620, Acc@5=99.670 | Loss= 0.33198
+
+==>>[2022-08-16 19:52:57] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.62, Error=8.38]
+[Pruning Method: eucl] Flop Reduction Rate: 0.169809/0.300000 [Pruned 3 filters from 29]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.390, Acc@5=99.660 | Loss= 0.34048
+
+==>>[2022-08-16 19:53:53] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.39, Error=8.61]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.177035/0.300000 [Pruned 1 filters from 5]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.340, Acc@5=99.640 | Loss= 0.34047
+
+==>>[2022-08-16 19:54:49] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.34, Error=8.66]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.187873/0.300000 [Pruned 6 filters from 53]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.330, Acc@5=99.650 | Loss= 0.34292
+
+==>>[2022-08-16 19:55:44] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.33, Error=8.67]
+[Pruning Method: l1norm] Flop Reduction Rate: 0.198712/0.300000 [Pruned 6 filters from 53]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.390, Acc@5=99.580 | Loss= 0.33849
+
+==>>[2022-08-16 19:56:40] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.39, Error=8.61]
+[Pruning Method: cos] Flop Reduction Rate: 0.209551/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.340, Acc@5=99.560 | Loss= 0.34130
+
+==>>[2022-08-16 19:57:35] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.34, Error=8.66]
+[Pruning Method: cos] Flop Reduction Rate: 0.220390/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.130, Acc@5=99.520 | Loss= 0.34261
+
+==>>[2022-08-16 19:58:30] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.13, Error=8.87]
+[Pruning Method: cos] Flop Reduction Rate: 0.231229/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.080, Acc@5=99.580 | Loss= 0.35185
+
+==>>[2022-08-16 19:59:25] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.08, Error=8.92]
+[Pruning Method: eucl] Flop Reduction Rate: 0.242068/0.300000 [Pruned 6 filters from 53]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.120, Acc@5=99.500 | Loss= 0.34839
+
+==>>[2022-08-16 20:00:20] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.12, Error=8.88]
+[Pruning Method: cos] Flop Reduction Rate: 0.249294/0.300000 [Pruned 1 filters from 10]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=91.080, Acc@5=99.560 | Loss= 0.35223
+
+==>>[2022-08-16 20:01:16] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=91.08, Error=8.92]
+[Pruning Method: cos] Flop Reduction Rate: 0.260132/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=90.860, Acc@5=99.570 | Loss= 0.35804
+
+==>>[2022-08-16 20:02:10] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=90.86, Error=9.14]
+[Pruning Method: cos] Flop Reduction Rate: 0.270971/0.300000 [Pruned 3 filters from 29]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=90.880, Acc@5=99.600 | Loss= 0.35159
+
+==>>[2022-08-16 20:03:04] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=90.88, Error=9.12]
+[Pruning Method: eucl] Flop Reduction Rate: 0.281810/0.300000 [Pruned 3 filters from 29]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=90.760, Acc@5=99.560 | Loss= 0.34981
+
+==>>[2022-08-16 20:03:59] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=90.76, Error=9.24]
+[Pruning Method: cos] Flop Reduction Rate: 0.292649/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=90.770, Acc@5=99.560 | Loss= 0.35642
+
+==>>[2022-08-16 20:04:53] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=90.77, Error=9.23]
+[Pruning Method: eucl] Flop Reduction Rate: 0.303488/0.300000 [Pruned 3 filters from 34]
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=90.710, Acc@5=99.620 | Loss= 0.35834
+
+==>>[2022-08-16 20:05:48] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=90.71, Error=9.29]
+Prune Stats: {'l1norm': 29, 'l2norm': 0, 'eucl': 20, 'cos': 23}
+Final Flop Reduction Rate: 0.3035
+Conv Filters Before Pruning: {1: 16, 5: 16, 7: 16, 10: 16, 12: 16, 15: 16, 17: 16, 21: 32, 23: 32, 26: 32, 29: 32, 31: 32, 34: 32, 36: 32, 40: 64, 42: 64, 45: 64, 48: 64, 50: 64, 53: 64, 55: 64}
+Conv Filters After Pruning: {1: 16, 5: 9, 7: 16, 10: 6, 12: 16, 15: 12, 17: 16, 21: 32, 23: 32, 26: 32, 29: 20, 31: 32, 34: 11, 36: 32, 40: 64, 42: 64, 45: 64, 48: 64, 50: 64, 53: 46, 55: 64}
+Layerwise Pruning Rate: {1: 0.0, 5: 0.4375, 7: 0.0, 10: 0.625, 12: 0.0, 15: 0.25, 17: 0.0, 21: 0.0, 23: 0.0, 26: 0.0, 29: 0.375, 31: 0.0, 34: 0.65625, 36: 0.0, 40: 0.0, 42: 0.0, 45: 0.0, 48: 0.0, 50: 0.0, 53: 0.28125, 55: 0.0}
+=> Model [After Pruning]:
+ CifarResNet(
+  (conv_1_3x3): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 9, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(9, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(9, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(16, 6, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(6, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(6, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(16, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(12, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(12, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_2): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(32, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(20, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(32, 11, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(11, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(11, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_3): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(64, 46, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(46, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(46, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AvgPool2d(kernel_size=8, stride=8, padding=0)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+Epoch 120/160 [learning_rate=0.000800] Val [Acc@1=90.850, Acc@5=99.640 | Loss= 0.35167
+
+==>>[2022-08-16 20:06:31] [Epoch=120/160] [Need: 00:00:00] [learning_rate=0.0008] [Best : Acc@1=90.85, Error=9.15]
+Epoch 121/160 [learning_rate=0.000800] Val [Acc@1=90.730, Acc@5=99.620 | Loss= 0.35866
+Epoch 122/160 [learning_rate=0.000800] Val [Acc@1=90.720, Acc@5=99.640 | Loss= 0.34788
+Epoch 123/160 [learning_rate=0.000800] Val [Acc@1=91.010, Acc@5=99.620 | Loss= 0.34900
+
+==>>[2022-08-16 20:08:42] [Epoch=123/160] [Need: 00:26:41] [learning_rate=0.0008] [Best : Acc@1=91.01, Error=8.99]
+Epoch 124/160 [learning_rate=0.000800] Val [Acc@1=91.020, Acc@5=99.710 | Loss= 0.35180
+
+==>>[2022-08-16 20:09:25] [Epoch=124/160] [Need: 00:26:06] [learning_rate=0.0008] [Best : Acc@1=91.02, Error=8.98]
+Epoch 125/160 [learning_rate=0.000800] Val [Acc@1=90.970, Acc@5=99.700 | Loss= 0.34973
+Epoch 126/160 [learning_rate=0.000800] Val [Acc@1=91.060, Acc@5=99.660 | Loss= 0.34812
+
+==>>[2022-08-16 20:10:52] [Epoch=126/160] [Need: 00:24:35] [learning_rate=0.0008] [Best : Acc@1=91.06, Error=8.94]
+Epoch 127/160 [learning_rate=0.000800] Val [Acc@1=91.000, Acc@5=99.650 | Loss= 0.35332
+Epoch 128/160 [learning_rate=0.000800] Val [Acc@1=90.790, Acc@5=99.680 | Loss= 0.35168
+Epoch 129/160 [learning_rate=0.000800] Val [Acc@1=91.060, Acc@5=99.700 | Loss= 0.34932
+Epoch 130/160 [learning_rate=0.000800] Val [Acc@1=90.980, Acc@5=99.710 | Loss= 0.34688
+Epoch 131/160 [learning_rate=0.000800] Val [Acc@1=91.060, Acc@5=99.700 | Loss= 0.34993
+Epoch 132/160 [learning_rate=0.000800] Val [Acc@1=91.140, Acc@5=99.670 | Loss= 0.34495
+
+==>>[2022-08-16 20:15:13] [Epoch=132/160] [Need: 00:20:17] [learning_rate=0.0008] [Best : Acc@1=91.14, Error=8.86]
+Epoch 133/160 [learning_rate=0.000800] Val [Acc@1=90.910, Acc@5=99.670 | Loss= 0.35567
+Epoch 134/160 [learning_rate=0.000800] Val [Acc@1=91.100, Acc@5=99.670 | Loss= 0.35375
+Epoch 135/160 [learning_rate=0.000800] Val [Acc@1=91.020, Acc@5=99.720 | Loss= 0.34880
+Epoch 136/160 [learning_rate=0.000800] Val [Acc@1=91.270, Acc@5=99.690 | Loss= 0.34659
+
+==>>[2022-08-16 20:18:07] [Epoch=136/160] [Need: 00:17:24] [learning_rate=0.0008] [Best : Acc@1=91.27, Error=8.73]
+Epoch 137/160 [learning_rate=0.000800] Val [Acc@1=91.160, Acc@5=99.710 | Loss= 0.34589
+Epoch 138/160 [learning_rate=0.000800] Val [Acc@1=91.020, Acc@5=99.660 | Loss= 0.34612
+Epoch 139/160 [learning_rate=0.000800] Val [Acc@1=91.110, Acc@5=99.660 | Loss= 0.34690
+Epoch 140/160 [learning_rate=0.000800] Val [Acc@1=91.160, Acc@5=99.620 | Loss= 0.34624
+Epoch 141/160 [learning_rate=0.000800] Val [Acc@1=91.180, Acc@5=99.680 | Loss= 0.34792
+Epoch 142/160 [learning_rate=0.000800] Val [Acc@1=91.090, Acc@5=99.660 | Loss= 0.34719
+Epoch 143/160 [learning_rate=0.000800] Val [Acc@1=91.120, Acc@5=99.660 | Loss= 0.34865
+Epoch 144/160 [learning_rate=0.000800] Val [Acc@1=91.230, Acc@5=99.650 | Loss= 0.34884
+Epoch 145/160 [learning_rate=0.000800] Val [Acc@1=91.140, Acc@5=99.660 | Loss= 0.34584
+Epoch 146/160 [learning_rate=0.000800] Val [Acc@1=91.130, Acc@5=99.640 | Loss= 0.34861
+Epoch 147/160 [learning_rate=0.000800] Val [Acc@1=91.050, Acc@5=99.670 | Loss= 0.35056
+Epoch 148/160 [learning_rate=0.000800] Val [Acc@1=91.240, Acc@5=99.670 | Loss= 0.35118
+Epoch 149/160 [learning_rate=0.000800] Val [Acc@1=91.300, Acc@5=99.690 | Loss= 0.35237
+
+==>>[2022-08-16 20:27:33] [Epoch=149/160] [Need: 00:07:58] [learning_rate=0.0008] [Best : Acc@1=91.30, Error=8.70]
+Epoch 150/160 [learning_rate=0.000800] Val [Acc@1=91.140, Acc@5=99.640 | Loss= 0.35112
+Epoch 151/160 [learning_rate=0.000800] Val [Acc@1=91.300, Acc@5=99.660 | Loss= 0.34889
+Epoch 152/160 [learning_rate=0.000800] Val [Acc@1=91.320, Acc@5=99.640 | Loss= 0.34978
+
+==>>[2022-08-16 20:29:43] [Epoch=152/160] [Need: 00:05:48] [learning_rate=0.0008] [Best : Acc@1=91.32, Error=8.68]
+Epoch 153/160 [learning_rate=0.000800] Val [Acc@1=91.170, Acc@5=99.650 | Loss= 0.35213
+Epoch 154/160 [learning_rate=0.000800] Val [Acc@1=91.400, Acc@5=99.720 | Loss= 0.34913
+
+==>>[2022-08-16 20:31:11] [Epoch=154/160] [Need: 00:04:21] [learning_rate=0.0008] [Best : Acc@1=91.40, Error=8.60]
+Epoch 155/160 [learning_rate=0.000800] Val [Acc@1=91.150, Acc@5=99.670 | Loss= 0.35307
+Epoch 156/160 [learning_rate=0.000800] Val [Acc@1=91.190, Acc@5=99.660 | Loss= 0.34864
+Epoch 157/160 [learning_rate=0.000800] Val [Acc@1=91.030, Acc@5=99.630 | Loss= 0.35404
+Epoch 158/160 [learning_rate=0.000800] Val [Acc@1=91.410, Acc@5=99.630 | Loss= 0.34730
+
+==>>[2022-08-16 20:34:04] [Epoch=158/160] [Need: 00:01:27] [learning_rate=0.0008] [Best : Acc@1=91.41, Error=8.59]
+Epoch 159/160 [learning_rate=0.000800] Val [Acc@1=91.190, Acc@5=99.680 | Loss= 0.35264
