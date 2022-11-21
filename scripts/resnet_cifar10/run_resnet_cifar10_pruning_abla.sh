@@ -26,35 +26,6 @@ run_20()
     pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$PRUNE_EPOCH_NO.$NET.$ROUND.$FLOP_RATE $FLOP_RATE $PRUNE_EPOCH_NO
 }
 
-'''
-run_32()
-{
-    NET="resnet32"
-    FLOP_RATE="0.531"
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.1.$FLOP_RATE $FLOP_RATE
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
-}
-
-run_56()
-{
-    NET="resnet56"
-    FLOP_RATE="0.525"
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.1.$FLOP_RATE $FLOP_RATE
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
-}
-
-run_110()
-{
-    NET="resnet110"
-    FLOP_RATE="0.522"
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.1.$FLOP_RATE $FLOP_RATE
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
-}
-'''
-
 for ROUND in 1 2 3
 do
     for PRUNE_EPOCH_NO in 10 20 30 40 50 60 70 80 90 100 110 120 130

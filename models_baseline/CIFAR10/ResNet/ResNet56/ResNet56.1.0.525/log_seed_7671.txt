@@ -1,0 +1,533 @@
+save path : Baseline_CIFAR10/ResNet56/ResNet56.1.0.525
+{'data_path': './data/cifar.python', 'pretrain_path': 'Baseline_CIFAR10/ResNet56/ResNet56.1.0.525/resnet56.epoch.60.pth.tar', 'pruned_path': './', 'dataset': 'cifar10', 'arch': 'resnet56', 'save_path': 'Baseline_CIFAR10/ResNet56/ResNet56.1.0.525', 'mode': 'train', 'batch_size': 256, 'verbose': False, 'total_epoches': 200, 'start_epoch': 60, 'prune_epoch': 30, 'recover_epoch': 1, 'lr': 0.1, 'momentum': 0.9, 'decay': 0.0005, 'schedule': [60, 120, 160, 190], 'gammas': [0.2, 0.2, 0.2, 0.2], 'seed': 1, 'no_cuda': False, 'ngpu': 1, 'workers': 8, 'rate_flop': 0.342, 'recover_flop': 0.0, 'manualSeed': 7671, 'cuda': True, 'use_cuda': True}
+Random Seed: 7671
+python version : 3.10.4 | packaged by conda-forge | (main, Mar 30 2022, 08:38:02) [MSC v.1916 64 bit (AMD64)]
+torch  version : 1.12.0
+cudnn  version : 8302
+Pretrain path: Baseline_CIFAR10/ResNet56/ResNet56.1.0.525/resnet56.epoch.60.pth.tar
+Pruned path: ./
+=> creating model 'resnet56'
+=> Model : CifarResNet(
+  (conv_1_3x3): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (3): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (4): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (5): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (6): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (7): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (8): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_2): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (3): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (4): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (5): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (6): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (7): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (8): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_3): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (3): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (4): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (5): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (6): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (7): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (8): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AvgPool2d(kernel_size=8, stride=8, padding=0)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+=> parameter : Namespace(data_path='./data/cifar.python', pretrain_path='Baseline_CIFAR10/ResNet56/ResNet56.1.0.525/resnet56.epoch.60.pth.tar', pruned_path='./', dataset='cifar10', arch='resnet56', save_path='Baseline_CIFAR10/ResNet56/ResNet56.1.0.525', mode='train', batch_size=256, verbose=False, total_epoches=200, start_epoch=60, prune_epoch=30, recover_epoch=1, lr=0.1, momentum=0.9, decay=0.0005, schedule=[60, 120, 160, 190], gammas=[0.2, 0.2, 0.2, 0.2], seed=1, no_cuda=False, ngpu=1, workers=8, rate_flop=0.342, recover_flop=0.0, manualSeed=7671, cuda=True, use_cuda=True)
+=> train network :
+ CifarResNet(
+  (conv_1_3x3): Conv2d(3, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (3): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (4): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (5): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (6): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (7): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (8): ResNetBasicblock(
+      (conv_a): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_2): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (3): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (4): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (5): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (6): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (7): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (8): ResNetBasicblock(
+      (conv_a): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (stage_3): Sequential(
+    (0): ResNetBasicblock(
+      (conv_a): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (2): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (3): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (4): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (5): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (6): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (7): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (8): ResNetBasicblock(
+      (conv_a): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_a): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_b): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn_b): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AvgPool2d(kernel_size=8, stride=8, padding=0)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+Epoch 60/200 [learning_rate=0.020000] Val [Acc@1=91.690, Acc@5=99.780 | Loss= 0.25836
+
+==>>[2022-08-28 07:36:02] [Epoch=060/200] [Need: 00:00:00] [learning_rate=0.0200] [Best : Acc@1=91.69, Error=8.31]
+Epoch 61/200 [learning_rate=0.020000] Val [Acc@1=91.870, Acc@5=99.860 | Loss= 0.25173
+
+==>>[2022-08-28 07:36:53] [Epoch=061/200] [Need: 01:59:56] [learning_rate=0.0200] [Best : Acc@1=91.87, Error=8.13]
+Epoch 62/200 [learning_rate=0.020000] Val [Acc@1=91.510, Acc@5=99.780 | Loss= 0.27144
+Epoch 63/200 [learning_rate=0.020000] Val [Acc@1=91.840, Acc@5=99.760 | Loss= 0.25541
+Epoch 64/200 [learning_rate=0.020000] Val [Acc@1=91.350, Acc@5=99.850 | Loss= 0.28208
+Epoch 65/200 [learning_rate=0.020000] Val [Acc@1=91.750, Acc@5=99.800 | Loss= 0.27473
+Epoch 66/200 [learning_rate=0.020000] Val [Acc@1=91.940, Acc@5=99.750 | Loss= 0.27635
+
+==>>[2022-08-28 07:40:57] [Epoch=066/200] [Need: 01:50:25] [learning_rate=0.0200] [Best : Acc@1=91.94, Error=8.06]
+Epoch 67/200 [learning_rate=0.020000] Val [Acc@1=91.680, Acc@5=99.790 | Loss= 0.27257
+Epoch 68/200 [learning_rate=0.020000] Val [Acc@1=90.930, Acc@5=99.790 | Loss= 0.30156
+Epoch 69/200 [learning_rate=0.020000] Val [Acc@1=91.180, Acc@5=99.700 | Loss= 0.31298
+Epoch 70/200 [learning_rate=0.020000] Val [Acc@1=90.310, Acc@5=99.740 | Loss= 0.35525
+Epoch 71/200 [learning_rate=0.020000] Val [Acc@1=90.190, Acc@5=99.650 | Loss= 0.35397
+Epoch 72/200 [learning_rate=0.020000] Val [Acc@1=89.890, Acc@5=99.600 | Loss= 0.37703
+Epoch 73/200 [learning_rate=0.020000] Val [Acc@1=90.790, Acc@5=99.690 | Loss= 0.31675
+Epoch 74/200 [learning_rate=0.020000] Val [Acc@1=91.250, Acc@5=99.750 | Loss= 0.32414
+Epoch 75/200 [learning_rate=0.020000] Val [Acc@1=91.610, Acc@5=99.760 | Loss= 0.30107
+Epoch 76/200 [learning_rate=0.020000] Val [Acc@1=90.630, Acc@5=99.630 | Loss= 0.35856
+Epoch 77/200 [learning_rate=0.020000] Val [Acc@1=90.560, Acc@5=99.710 | Loss= 0.33307
+Epoch 78/200 [learning_rate=0.020000] Val [Acc@1=91.040, Acc@5=99.570 | Loss= 0.32513
+Epoch 79/200 [learning_rate=0.020000] Val [Acc@1=86.950, Acc@5=99.570 | Loss= 0.56380
+Epoch 80/200 [learning_rate=0.020000] Val [Acc@1=89.910, Acc@5=99.630 | Loss= 0.36392
+Epoch 81/200 [learning_rate=0.020000] Val [Acc@1=91.370, Acc@5=99.720 | Loss= 0.32368
+Epoch 82/200 [learning_rate=0.020000] Val [Acc@1=91.430, Acc@5=99.720 | Loss= 0.30531
+Epoch 83/200 [learning_rate=0.020000] Val [Acc@1=90.710, Acc@5=99.590 | Loss= 0.33271
+Epoch 84/200 [learning_rate=0.020000] Val [Acc@1=90.340, Acc@5=99.650 | Loss= 0.35420
+Epoch 85/200 [learning_rate=0.020000] Val [Acc@1=90.060, Acc@5=99.610 | Loss= 0.36403
+Epoch 86/200 [learning_rate=0.020000] Val [Acc@1=89.580, Acc@5=99.710 | Loss= 0.36781
+Epoch 87/200 [learning_rate=0.020000] Val [Acc@1=89.960, Acc@5=99.770 | Loss= 0.36317
+Epoch 88/200 [learning_rate=0.020000] Val [Acc@1=89.610, Acc@5=99.680 | Loss= 0.36788
+Epoch 89/200 [learning_rate=0.020000] Val [Acc@1=89.600, Acc@5=99.520 | Loss= 0.37763
+Epoch 90/200 [learning_rate=0.020000] Val [Acc@1=89.820, Acc@5=99.640 | Loss= 0.36362
+Epoch 91/200 [learning_rate=0.020000] Val [Acc@1=87.610, Acc@5=99.090 | Loss= 0.45845
+Epoch 92/200 [learning_rate=0.020000] Val [Acc@1=90.000, Acc@5=99.630 | Loss= 0.35506
+Epoch 93/200 [learning_rate=0.020000] Val [Acc@1=91.000, Acc@5=99.650 | Loss= 0.32039
+Epoch 94/200 [learning_rate=0.020000] Val [Acc@1=90.430, Acc@5=99.760 | Loss= 0.33132
+Epoch 95/200 [learning_rate=0.020000] Val [Acc@1=89.910, Acc@5=99.600 | Loss= 0.36246
+Epoch 96/200 [learning_rate=0.020000] Val [Acc@1=90.270, Acc@5=99.550 | Loss= 0.35034
+Epoch 97/200 [learning_rate=0.020000] Val [Acc@1=89.780, Acc@5=99.580 | Loss= 0.35771
+Epoch 98/200 [learning_rate=0.020000] Val [Acc@1=89.900, Acc@5=99.580 | Loss= 0.35727
+Epoch 99/200 [learning_rate=0.020000] Val [Acc@1=90.020, Acc@5=99.680 | Loss= 0.35505
+Epoch 100/200 [learning_rate=0.020000] Val [Acc@1=89.010, Acc@5=99.630 | Loss= 0.39181
+Epoch 101/200 [learning_rate=0.020000] Val [Acc@1=89.830, Acc@5=99.690 | Loss= 0.36220
+Epoch 102/200 [learning_rate=0.020000] Val [Acc@1=88.590, Acc@5=99.570 | Loss= 0.41521
+Epoch 103/200 [learning_rate=0.020000] Val [Acc@1=88.600, Acc@5=99.690 | Loss= 0.41992
+Epoch 104/200 [learning_rate=0.020000] Val [Acc@1=89.900, Acc@5=99.640 | Loss= 0.34850
+Epoch 105/200 [learning_rate=0.020000] Val [Acc@1=88.960, Acc@5=99.570 | Loss= 0.41946
+Epoch 106/200 [learning_rate=0.020000] Val [Acc@1=89.910, Acc@5=99.650 | Loss= 0.35420
+Epoch 107/200 [learning_rate=0.020000] Val [Acc@1=88.880, Acc@5=99.650 | Loss= 0.40810
+Epoch 108/200 [learning_rate=0.020000] Val [Acc@1=89.260, Acc@5=99.720 | Loss= 0.38294
+Epoch 109/200 [learning_rate=0.020000] Val [Acc@1=89.680, Acc@5=99.550 | Loss= 0.37829
+Epoch 110/200 [learning_rate=0.020000] Val [Acc@1=90.550, Acc@5=99.680 | Loss= 0.33350
+Epoch 111/200 [learning_rate=0.020000] Val [Acc@1=90.670, Acc@5=99.620 | Loss= 0.33978
+Epoch 112/200 [learning_rate=0.020000] Val [Acc@1=90.420, Acc@5=99.640 | Loss= 0.34410
+Epoch 113/200 [learning_rate=0.020000] Val [Acc@1=89.180, Acc@5=99.570 | Loss= 0.39781
+Epoch 114/200 [learning_rate=0.020000] Val [Acc@1=88.890, Acc@5=99.540 | Loss= 0.41389
+Epoch 115/200 [learning_rate=0.020000] Val [Acc@1=89.120, Acc@5=99.520 | Loss= 0.39603
+Epoch 116/200 [learning_rate=0.020000] Val [Acc@1=89.880, Acc@5=99.560 | Loss= 0.37460
+Epoch 117/200 [learning_rate=0.020000] Val [Acc@1=89.670, Acc@5=99.700 | Loss= 0.37419
+Epoch 118/200 [learning_rate=0.020000] Val [Acc@1=91.230, Acc@5=99.710 | Loss= 0.31857
+Epoch 119/200 [learning_rate=0.020000] Val [Acc@1=88.720, Acc@5=99.510 | Loss= 0.43637
+Epoch 120/200 [learning_rate=0.004000] Val [Acc@1=93.270, Acc@5=99.800 | Loss= 0.24649
+
+==>>[2022-08-28 08:22:49] [Epoch=120/200] [Need: 01:02:27] [learning_rate=0.0040] [Best : Acc@1=93.27, Error=6.73]
+Epoch 121/200 [learning_rate=0.004000] Val [Acc@1=93.080, Acc@5=99.840 | Loss= 0.25548
+Epoch 122/200 [learning_rate=0.004000] Val [Acc@1=93.370, Acc@5=99.780 | Loss= 0.25062
+
+==>>[2022-08-28 08:24:22] [Epoch=122/200] [Need: 01:00:52] [learning_rate=0.0040] [Best : Acc@1=93.37, Error=6.63]
+Epoch 123/200 [learning_rate=0.004000] Val [Acc@1=93.420, Acc@5=99.850 | Loss= 0.26251
+
+==>>[2022-08-28 08:25:08] [Epoch=123/200] [Need: 01:00:05] [learning_rate=0.0040] [Best : Acc@1=93.42, Error=6.58]
+Epoch 124/200 [learning_rate=0.004000] Val [Acc@1=93.220, Acc@5=99.820 | Loss= 0.26813
+Epoch 125/200 [learning_rate=0.004000] Val [Acc@1=93.570, Acc@5=99.820 | Loss= 0.25267
+
+==>>[2022-08-28 08:26:42] [Epoch=125/200] [Need: 00:58:30] [learning_rate=0.0040] [Best : Acc@1=93.57, Error=6.43]
+Epoch 126/200 [learning_rate=0.004000] Val [Acc@1=93.410, Acc@5=99.760 | Loss= 0.26644
+Epoch 127/200 [learning_rate=0.004000] Val [Acc@1=93.390, Acc@5=99.830 | Loss= 0.26902
+Epoch 128/200 [learning_rate=0.004000] Val [Acc@1=93.380, Acc@5=99.810 | Loss= 0.27269
+Epoch 129/200 [learning_rate=0.004000] Val [Acc@1=93.180, Acc@5=99.810 | Loss= 0.28154
+Epoch 130/200 [learning_rate=0.004000] Val [Acc@1=93.480, Acc@5=99.810 | Loss= 0.27663
+Epoch 131/200 [learning_rate=0.004000] Val [Acc@1=93.290, Acc@5=99.850 | Loss= 0.27947
+Epoch 132/200 [learning_rate=0.004000] Val [Acc@1=93.470, Acc@5=99.830 | Loss= 0.28478
+Epoch 133/200 [learning_rate=0.004000] Val [Acc@1=93.360, Acc@5=99.790 | Loss= 0.28877
+Epoch 134/200 [learning_rate=0.004000] Val [Acc@1=93.400, Acc@5=99.800 | Loss= 0.28655
+Epoch 135/200 [learning_rate=0.004000] Val [Acc@1=93.430, Acc@5=99.800 | Loss= 0.29378
+Epoch 136/200 [learning_rate=0.004000] Val [Acc@1=93.290, Acc@5=99.820 | Loss= 0.28894
+Epoch 137/200 [learning_rate=0.004000] Val [Acc@1=93.480, Acc@5=99.750 | Loss= 0.30360
+Epoch 138/200 [learning_rate=0.004000] Val [Acc@1=93.400, Acc@5=99.810 | Loss= 0.28972
+Epoch 139/200 [learning_rate=0.004000] Val [Acc@1=93.460, Acc@5=99.780 | Loss= 0.28327
+Epoch 140/200 [learning_rate=0.004000] Val [Acc@1=93.490, Acc@5=99.810 | Loss= 0.29469
+Epoch 141/200 [learning_rate=0.004000] Val [Acc@1=93.500, Acc@5=99.830 | Loss= 0.28858
+Epoch 142/200 [learning_rate=0.004000] Val [Acc@1=93.630, Acc@5=99.760 | Loss= 0.29256
+
+==>>[2022-08-28 08:39:52] [Epoch=142/200] [Need: 00:45:11] [learning_rate=0.0040] [Best : Acc@1=93.63, Error=6.37]
+Epoch 143/200 [learning_rate=0.004000] Val [Acc@1=93.460, Acc@5=99.830 | Loss= 0.28907
+Epoch 144/200 [learning_rate=0.004000] Val [Acc@1=93.720, Acc@5=99.760 | Loss= 0.28878
+
+==>>[2022-08-28 08:41:26] [Epoch=144/200] [Need: 00:43:37] [learning_rate=0.0040] [Best : Acc@1=93.72, Error=6.28]
+Epoch 145/200 [learning_rate=0.004000] Val [Acc@1=93.380, Acc@5=99.770 | Loss= 0.30788
+Epoch 146/200 [learning_rate=0.004000] Val [Acc@1=93.270, Acc@5=99.770 | Loss= 0.30540
+Epoch 147/200 [learning_rate=0.004000] Val [Acc@1=93.280, Acc@5=99.830 | Loss= 0.30274
+Epoch 148/200 [learning_rate=0.004000] Val [Acc@1=93.000, Acc@5=99.800 | Loss= 0.31819
+Epoch 149/200 [learning_rate=0.004000] Val [Acc@1=92.890, Acc@5=99.790 | Loss= 0.33310
+Epoch 150/200 [learning_rate=0.004000] Val [Acc@1=93.300, Acc@5=99.800 | Loss= 0.29988
+Epoch 151/200 [learning_rate=0.004000] Val [Acc@1=93.150, Acc@5=99.810 | Loss= 0.30741
+Epoch 152/200 [learning_rate=0.004000] Val [Acc@1=93.200, Acc@5=99.780 | Loss= 0.31634
+Epoch 153/200 [learning_rate=0.004000] Val [Acc@1=93.310, Acc@5=99.790 | Loss= 0.30829
+Epoch 154/200 [learning_rate=0.004000] Val [Acc@1=93.070, Acc@5=99.810 | Loss= 0.30336
+Epoch 155/200 [learning_rate=0.004000] Val [Acc@1=93.240, Acc@5=99.800 | Loss= 0.31314
+Epoch 156/200 [learning_rate=0.004000] Val [Acc@1=93.160, Acc@5=99.760 | Loss= 0.30703
+Epoch 157/200 [learning_rate=0.004000] Val [Acc@1=93.210, Acc@5=99.790 | Loss= 0.31388
+Epoch 158/200 [learning_rate=0.004000] Val [Acc@1=93.070, Acc@5=99.800 | Loss= 0.32231
+Epoch 159/200 [learning_rate=0.004000] Val [Acc@1=93.180, Acc@5=99.840 | Loss= 0.31873
+Epoch 160/200 [learning_rate=0.000800] Val [Acc@1=93.400, Acc@5=99.840 | Loss= 0.30431
+Epoch 161/200 [learning_rate=0.000800] Val [Acc@1=93.500, Acc@5=99.830 | Loss= 0.30184
+Epoch 162/200 [learning_rate=0.000800] Val [Acc@1=93.550, Acc@5=99.790 | Loss= 0.30277
+Epoch 163/200 [learning_rate=0.000800] Val [Acc@1=93.610, Acc@5=99.810 | Loss= 0.29839
+Epoch 164/200 [learning_rate=0.000800] Val [Acc@1=93.540, Acc@5=99.790 | Loss= 0.29916
+Epoch 165/200 [learning_rate=0.000800] Val [Acc@1=93.550, Acc@5=99.810 | Loss= 0.29757
+Epoch 166/200 [learning_rate=0.000800] Val [Acc@1=93.590, Acc@5=99.830 | Loss= 0.29839
+Epoch 167/200 [learning_rate=0.000800] Val [Acc@1=93.520, Acc@5=99.830 | Loss= 0.29646
+Epoch 168/200 [learning_rate=0.000800] Val [Acc@1=93.640, Acc@5=99.820 | Loss= 0.29693
+Epoch 169/200 [learning_rate=0.000800] Val [Acc@1=93.660, Acc@5=99.780 | Loss= 0.29698
+Epoch 170/200 [learning_rate=0.000800] Val [Acc@1=93.550, Acc@5=99.790 | Loss= 0.30031
+Epoch 171/200 [learning_rate=0.000800] Val [Acc@1=93.560, Acc@5=99.810 | Loss= 0.29878
+Epoch 172/200 [learning_rate=0.000800] Val [Acc@1=93.510, Acc@5=99.770 | Loss= 0.30196
+Epoch 173/200 [learning_rate=0.000800] Val [Acc@1=93.550, Acc@5=99.820 | Loss= 0.29726
+Epoch 174/200 [learning_rate=0.000800] Val [Acc@1=93.550, Acc@5=99.820 | Loss= 0.29607
+Epoch 175/200 [learning_rate=0.000800] Val [Acc@1=93.590, Acc@5=99.810 | Loss= 0.29945
+Epoch 176/200 [learning_rate=0.000800] Val [Acc@1=93.630, Acc@5=99.800 | Loss= 0.29607
+Epoch 177/200 [learning_rate=0.000800] Val [Acc@1=93.690, Acc@5=99.810 | Loss= 0.30122
+Epoch 178/200 [learning_rate=0.000800] Val [Acc@1=93.580, Acc@5=99.800 | Loss= 0.29907
+Epoch 179/200 [learning_rate=0.000800] Val [Acc@1=93.610, Acc@5=99.820 | Loss= 0.29869
+Epoch 180/200 [learning_rate=0.000800] Val [Acc@1=93.540, Acc@5=99.800 | Loss= 0.29923
+Epoch 181/200 [learning_rate=0.000800] Val [Acc@1=93.480, Acc@5=99.800 | Loss= 0.30137
+Epoch 182/200 [learning_rate=0.000800] Val [Acc@1=93.610, Acc@5=99.800 | Loss= 0.29802
+Epoch 183/200 [learning_rate=0.000800] Val [Acc@1=93.580, Acc@5=99.810 | Loss= 0.29847
+Epoch 184/200 [learning_rate=0.000800] Val [Acc@1=93.660, Acc@5=99.820 | Loss= 0.29897
+Epoch 185/200 [learning_rate=0.000800] Val [Acc@1=93.650, Acc@5=99.820 | Loss= 0.29644
+Epoch 186/200 [learning_rate=0.000800] Val [Acc@1=93.600, Acc@5=99.820 | Loss= 0.30079
+Epoch 187/200 [learning_rate=0.000800] Val [Acc@1=93.570, Acc@5=99.810 | Loss= 0.29769
+Epoch 188/200 [learning_rate=0.000800] Val [Acc@1=93.580, Acc@5=99.780 | Loss= 0.29867
+Epoch 189/200 [learning_rate=0.000800] Val [Acc@1=93.600, Acc@5=99.780 | Loss= 0.29861
+Epoch 190/200 [learning_rate=0.000160] Val [Acc@1=93.610, Acc@5=99.820 | Loss= 0.30039
+Epoch 191/200 [learning_rate=0.000160] Val [Acc@1=93.620, Acc@5=99.800 | Loss= 0.29795
+Epoch 192/200 [learning_rate=0.000160] Val [Acc@1=93.590, Acc@5=99.800 | Loss= 0.29704
+Epoch 193/200 [learning_rate=0.000160] Val [Acc@1=93.640, Acc@5=99.760 | Loss= 0.29706
+Epoch 194/200 [learning_rate=0.000160] Val [Acc@1=93.610, Acc@5=99.780 | Loss= 0.29922
+Epoch 195/200 [learning_rate=0.000160] Val [Acc@1=93.700, Acc@5=99.790 | Loss= 0.29692
+Epoch 196/200 [learning_rate=0.000160] Val [Acc@1=93.640, Acc@5=99.810 | Loss= 0.29699
+Epoch 197/200 [learning_rate=0.000160] Val [Acc@1=93.610, Acc@5=99.800 | Loss= 0.29797
+Epoch 198/200 [learning_rate=0.000160] Val [Acc@1=93.640, Acc@5=99.810 | Loss= 0.29578
+Epoch 199/200 [learning_rate=0.000160] Val [Acc@1=93.580, Acc@5=99.830 | Loss= 0.29867

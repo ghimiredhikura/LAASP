@@ -16,7 +16,6 @@ from torchvision import transforms
 import torch.nn.functional as F
 import torch.nn as nn
 import numpy as np
-import utils.accuracy as acc
 from utils.utils import AverageMeter, RecorderMeter, time_string
 from utils.utils import convert_secs2time, get_ncc_sim_matrix, get_n_flops_
 
@@ -27,6 +26,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--data_path", type=str, default="./data")
 parser.add_argument('--dataset', type=str, default='cifar10')
 parser.add_argument('--pretrain_path', type=str, help='..path of pre-trained model')
+parser.add_argument('--baseline_path', type=str, help='..path of pre-trained model')
 parser.add_argument('--pruned_path', type=str, help='..path of pre-trained model')
 parser.add_argument("--ckpt_path", type=str, default='')
 parser.add_argument('--save_path', type=str, default='./', help='Folder to save checkpoints and log.')
@@ -167,9 +167,9 @@ def main():
         train(model, train_loader, test_loader, criterion, 0, args.total_epoches,log)
 
     elif args.mode == 'eval':       
-        if os.path.isfile(args.pretrain_path):
-            print_log("Load model from %s" % (args.pretrain_path), log)
-            pretrain = torch.load(args.pretrain_path)
+        if os.path.isfile(args.baseline_path):
+            print_log("Load model from %s" % (args.baseline_path), log)
+            pretrain = torch.load(args.baseline_path)
             model = pretrain['state_dict']
             print_log("=> network :\n {}".format(model), log, False)
 
@@ -199,7 +199,7 @@ def main():
             acc, loss = validate(test_loader, model, criterion)
             print_log("Pruned Top@1: %0.4f, Loss: %0.4f" % (acc, loss), log)
 
-        if os.path.isfile(args.pretrain_path) and os.path.isfile(args.pruned_path):
+        if os.path.isfile(args.baseline_path) and os.path.isfile(args.pruned_path):
             flop_reduction_rate = (1.0 - flops_pruned / flops_pretrain) * 100.0
             print_log("FLOPs reduction rate: %0.2lf%%" % flop_reduction_rate, log)
 

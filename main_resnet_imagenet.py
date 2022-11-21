@@ -193,9 +193,9 @@ def main():
 
     elif args.mode == 'eval':       
 
-        if os.path.isfile(args.pretrain_path):
-            print("Loading Baseline Model from: ", args.pretrain_path)
-            baseline = torch.load(args.pretrain_path)
+        if os.path.isfile(args.baseline_path):
+            print("Loading Baseline Model from: ", args.baseline_path)
+            baseline = torch.load(args.baseline_path)
             model = baseline['state_dict']
 
             print_log("=> Baseline network :\n {}".format(model), log)
@@ -225,7 +225,7 @@ def main():
             val_acc_top1, val_acc_top5, val_loss = validate(test_loader, model_pruned, criterion)
             print_log("Pruned Val Acc@1: %0.3lf, Acc@5: %0.3lf,  Loss: %0.5f" % (val_acc_top1, val_acc_top5, val_loss), log)
 
-        if os.path.isfile(args.pruned_path) and os.path.isfile(args.pretrain_path):
+        if os.path.isfile(args.pruned_path) and os.path.isfile(args.baseline_path):
             flop_reduction_rate = (1.0 - flops_pruned / flops_baseline) * 100.0
             print_log("Flop Reduction Rate: %0.2lf%%" % (flop_reduction_rate), log)
 
