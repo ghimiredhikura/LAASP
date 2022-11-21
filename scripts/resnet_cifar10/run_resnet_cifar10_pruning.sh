@@ -1,5 +1,5 @@
 
-PRUNE_DIR="C:/LAASP/CIFAR10_PRUNE_OneShot"
+PRUNE_DIR="CIFAR10_ResNet_PRUNE"
 
 pruning_ratio_pretrain_cifar10_resnet()
 {
@@ -55,17 +55,4 @@ run_32()
     pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$PRUNE_EPOCH_NO.$NET.3.$FLOP_RATE $FLOP_RATE $PRUNE_EPOCH_NO
 }
 
-#run_32
-
-run_20()
-{
-    NET="resnet20"
-    FLOP_RATE="0.531"
-
-    PRUNE_EPOCH_NO=50
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$PRUNE_EPOCH_NO.$NET.1.$FLOP_RATE $FLOP_RATE $PRUNE_EPOCH_NO
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$PRUNE_EPOCH_NO.$NET.2.$FLOP_RATE $FLOP_RATE $PRUNE_EPOCH_NO
-    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$PRUNE_EPOCH_NO.$NET.3.$FLOP_RATE $FLOP_RATE $PRUNE_EPOCH_NO
-}
-
-#run_20
+run_32

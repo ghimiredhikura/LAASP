@@ -1,9 +1,7 @@
 
-
 import sys, os, random, shutil, time
 import copy
 import random
-from collections import OrderedDict
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
@@ -19,7 +17,6 @@ from utils.utils import AverageMeter, RecorderMeter, time_string
 from utils.utils import convert_secs2time, get_ncc_sim_matrix, get_n_flops_
 
 import models
-import models.resnet_cifar as resnet
 
 from scipy.spatial import distance
 
@@ -30,6 +27,7 @@ model_names = sorted(name for name in models.__dict__
     and callable(models.__dict__[name]))
 
 parser.add_argument("--data_path", type=str, help='Path to dataset')
+parser.add_argument('--baseline_path', default='./', type=str, help='..path of baseline model')
 parser.add_argument('--pretrain_path', default='./', type=str, help='..path of pre-trained model')
 parser.add_argument('--pruned_path', default='./', type=str, help='..path of pruned model')
 parser.add_argument('--dataset', type=str, default='cifar10', choices=['cifar10', 'cifar100', 'imagenet', 'svhn', 'stl10'],
@@ -43,8 +41,9 @@ parser.add_argument('--save_path', type=str, default='./', help='Folder to save 
 parser.add_argument('--mode', type=str, default="eval", choices=['train', 'eval', 'prune'])
 parser.add_argument('--batch_size', type=int, default=256)
 parser.add_argument('--verbose', action='store_true', default=False)
-parser.add_argument('--total_epoches', type=int, default=160)
+parser.add_argument('--start_epoch', type=int, default=0)
 parser.add_argument('--prune_epoch', type=int, default=30)
+parser.add_argument('--total_epoches', type=int, default=160)
 parser.add_argument('--recover_epoch', type=int, default=1)
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR', help='learning rate (default: 0.1)')
 parser.add_argument('--momentum', type=float, default=0.9, metavar='M', help='SGD momentum (default: 0.9)')
@@ -172,18 +171,7 @@ def main():
     if args.mode == 'prune':
 
         if os.path.isfile(args.pretrain_path):
-            '''
-            print("Loading Model State Dict from: ", args.pretrain_path)
-            pretrain = torch.load(args.pretrain_path)
-            state_dict_org = pretrain['state_dict']
-            state_dict_new = OrderedDict()
-            # fix. Missing key(s) in state_dict: "conv1.weight", "bn1.weight",
-            # Unexpected key(s) in state_dict: "module.conv1.weight", "module.bn1.weight", ...
-            for n, v in state_dict_org.items():
-                name = n.replace("module.","") 
-                state_dict_new[name] = v
-            model.load_state_dict(state_dict_new)
-            '''
+
             print("Loading Model State Dict from: ", args.pretrain_path)
             pretrain = torch.load(args.pretrain_path)
             model = pretrain['state_dict']
@@ -195,7 +183,8 @@ def main():
             model.cuda()
 
         # train for 0 ~ args.prune_epoch
-        train(model, train_loader, test_loader, criterion, 0, args.prune_epoch, log)
+        train(model, train_loader, test_loader, criterion, args.start_epoch, args.prune_epoch, log)
+        
         # save halfway trained model just before pruning 
         save_checkpoint({
             'epoch': 0,
@@ -228,22 +217,16 @@ def main():
 
     elif args.mode == 'eval':       
 
-        if os.path.isfile(args.pretrain_path):
-            print("Loading Baseline Model from: ", args.pretrain_path)
-            baseline = torch.load(args.pretrain_path)
-            state_dict_org = baseline['state_dict']
-            state_dict_new = OrderedDict()
-            # fix. Missing key(s) in state_dict: "conv1.weight", "bn1.weight",
-            # Unexpected key(s) in state_dict: "module.conv1.weight", "module.bn1.weight", ...
-            for n, v in state_dict_org.items():
-                name = n.replace("module.","") 
-                state_dict_new[name] = v
-            model.load_state_dict(state_dict_new)
+        if os.path.isfile(args.baseline_path):
+            print("Loading Baseline Model from: ", args.baseline_path)
+            baseline = torch.load(args.baseline_path)
+            model = baseline['state_dict']
             print_log("=> Baseline network :\n {}".format(model), log, False)
 
             if args.use_cuda:
                 torch.cuda.empty_cache()
                 model.cuda()
+
             flops_baseline = get_n_flops_(model, img_size=(32, 32))
             print_log("Baseline Model Flops: %lf" % flops_baseline, log)
             val_acc_top1, val_acc_top5, val_loss = validate(test_loader, model, criterion)
@@ -264,7 +247,7 @@ def main():
             val_acc_top1, val_acc_top5, val_loss = validate(test_loader, model_pruned, criterion)
             print_log("Pruned Val Acc@1: %0.3lf, Acc@5: %0.3lf,  Loss: %0.5f" % (val_acc_top1, val_acc_top5, val_loss), log)
 
-        if os.path.isfile(args.pruned_path) and os.path.isfile(args.pretrain_path):
+        if os.path.isfile(args.pruned_path) and os.path.isfile(args.baseline_path):
             flop_reduction_rate = (1.0 - flops_pruned / flops_baseline) * 100.0
             print_log("Flop Reduction Rate: %0.2lf%%" % (flop_reduction_rate), log)
 
@@ -364,7 +347,7 @@ def prune(model, train_loader, loader_subset, test_loader, criterion, log):
     print_log("Layerwise Pruning Rate: " + ''.join(str(filter_prune_rate)), log)    
 
     # save pruned model before finetuning
-    save_checkpoint({
+    save_checkpoint( {
         'epoch': 0,
         'arch': args.arch,
         'state_dict': model,
@@ -377,10 +360,6 @@ def get_all_conv_index_to_prune(model):
     for idx, m in enumerate(model.modules()):
         if not isinstance(m, nn.Conv2d): # check if it is conv layer 
             continue
-        #if m.weight.shape[2] == 1 and m.weight.shape[3] == 1: # do not prune shortcut connection
-        #    continue
-        #if m.weight.shape[1] <= 3: # do not prune first conv layer
-        #    continue
         conv_filter_prune_idx.append(idx)
     return conv_filter_prune_idx
 

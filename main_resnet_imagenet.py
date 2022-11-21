@@ -30,6 +30,7 @@ model_names = sorted(name for name in models.__dict__
 
 parser.add_argument("--data_path", type=str, default="C:/ImageNet")
 parser.add_argument('--pretrain_path', default='./', type=str, help='..path of pre-trained model')
+parser.add_argument('--baseline_path', default='./', type=str, help='..path of baseline model')
 parser.add_argument('--pruned_path', default='./', type=str, help='..path of pruned model')
 parser.add_argument('--arch', '-a', metavar='ARCH', default='resnet18',
                     choices=model_names,
@@ -41,7 +42,7 @@ parser.add_argument('--mode', type=str, default="eval", choices=['train', 'eval'
 parser.add_argument('--batch_size', type=int, default=256)
 parser.add_argument('--verbose', action='store_true', default=False)
 parser.add_argument('--total_epoches', type=int, default=100)
-parser.add_argument('--start_epoch', type=int, default=100)
+parser.add_argument('--start_epoch', type=int, default=0)
 parser.add_argument('--prune_epoch', type=int, default=25)
 parser.add_argument('--recover_epoch', type=int, default=1)
 parser.add_argument('--print-freq', '-p', default=200, type=int, metavar='N', help='print frequency (default: 100)')
@@ -148,18 +149,6 @@ def main():
     if args.mode == 'prune':
 
         if os.path.isfile(args.pretrain_path):
-            '''
-            print("Loading Model State Dict from: ", args.pretrain_path)
-            pretrain = torch.load(args.pretrain_path)
-            state_dict_org = pretrain['state_dict']
-            state_dict_new = OrderedDict()
-            # fix. Missing key(s) in state_dict: "conv1.weight", "bn1.weight",
-            # Unexpected key(s) in state_dict: "module.conv1.weight", "module.bn1.weight", ...
-            for n, v in state_dict_org.items():
-                name = n.replace("module.","") 
-                state_dict_new[name] = v
-            model.load_state_dict(state_dict_new)
-            '''
             print("Loading Model State Dict from: ", args.pretrain_path)
             pretrain = torch.load(args.pretrain_path)
             model = pretrain['state_dict']
@@ -171,7 +160,7 @@ def main():
             model.cuda()
 
         # train for 0 ~ args.prune_epoch
-        train(model, train_loader, test_loader, criterion, 0, args.prune_epoch, log)
+        train(model, train_loader, test_loader, criterion, args.start_epoch, args.prune_epoch, log)
         # save halfway trained model just before pruning 
         save_checkpoint({
             'epoch': 0,
@@ -207,23 +196,19 @@ def main():
         if os.path.isfile(args.pretrain_path):
             print("Loading Baseline Model from: ", args.pretrain_path)
             baseline = torch.load(args.pretrain_path)
-            state_dict_org = baseline['state_dict']
-            state_dict_new = OrderedDict()
-            # fix. Missing key(s) in state_dict: "conv1.weight", "bn1.weight",
-            # Unexpected key(s) in state_dict: "module.conv1.weight", "module.bn1.weight", ...
-            for n, v in state_dict_org.items():
-                name = n.replace("module.","") 
-                state_dict_new[name] = v
-            model.load_state_dict(state_dict_new)
-            print_log("=> Baseline network :\n {}".format(model), log, False)
+            model = baseline['state_dict']
+
+            print_log("=> Baseline network :\n {}".format(model), log)
+            print_log("Baseline epoch: %d, arch: %s" % (baseline['epoch'], baseline['arch']), log)
 
             if args.use_cuda:
                 torch.cuda.empty_cache()
                 model.cuda()
+                
             flops_baseline = get_n_flops_(model, img_size=(224, 224))
             print_log("Baseline Model Flops: %lf" % flops_baseline, log)
             val_acc_top1, val_acc_top5, val_loss = validate(test_loader, model, criterion)
-            print_log("Baseline Val Acc@1: %0.3lf, Acc@5: %0.3lf,  Loss: %0.5f" % (val_acc_top1, val_acc_top5, val_loss), log)
+            print_log("Baseline Val Acc@1: %0.3lf, Acc@5: %0.3lf,  Loss: %0.5f" % (val_acc_top1, val_acc_top5, val_loss), log)            
 
         if os.path.isfile(args.pruned_path):
             print("Load Pruned Model from %s" % (args.pruned_path))

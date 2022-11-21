@@ -1,9 +1,9 @@
 
-PRUNE_DIR="C:/LAASP/CIFAR10_PRUNE_OneShot_Abla_Prune_Epoch"
+PRUNE_DIR="C:/LAASP/CIFAR10_ResNet_Abla"
 
 pruning_ratio_pretrain_cifar10_resnet()
 {
-    python main_resnet_cifar10_pc6.py --data_path ./data/cifar.python --dataset cifar10 \
+    python main_resnet_cifar10.py.py --data_path ./data/cifar.python --dataset cifar10 \
     --mode $1 \
     --arch $2 \
     --save_path $3 \
@@ -26,6 +26,7 @@ run_20()
     pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$PRUNE_EPOCH_NO.$NET.$ROUND.$FLOP_RATE $FLOP_RATE $PRUNE_EPOCH_NO
 }
 
+'''
 run_32()
 {
     NET="resnet32"
@@ -40,8 +41,8 @@ run_56()
     NET="resnet56"
     FLOP_RATE="0.525"
     pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.1.$FLOP_RATE $FLOP_RATE
-    #pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
-    #pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
+    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
+    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
 }
 
 run_110()
@@ -49,11 +50,12 @@ run_110()
     NET="resnet110"
     FLOP_RATE="0.522"
     pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.1.$FLOP_RATE $FLOP_RATE
-    #pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
-    #pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
+    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.2.$FLOP_RATE $FLOP_RATE
+    pruning_ratio_pretrain_cifar10_resnet prune $NET $PRUNE_DIR/$NET.3.$FLOP_RATE $FLOP_RATE
 }
+'''
 
-for ROUND in 3
+for ROUND in 1 2 3
 do
     for PRUNE_EPOCH_NO in 10 20 30 40 50 60 70 80 90 100 110 120 130
     do 
